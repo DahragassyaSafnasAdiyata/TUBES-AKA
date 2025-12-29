@@ -1,70 +1,62 @@
-// ===============================
-// Simulasi Struktur Linked List
-// ===============================
-
-// Setiap objek merepresentasikan node
+// ==================================
+// Data Buku (Simulasi Linked List)
+// ==================================
 const linkedListBuku = [
-    { isbn: "978001", judul: "Algoritma" },
+    { isbn: "978001", judul: "Algoritma dan Pemrograman" },
     { isbn: "978002", judul: "Struktur Data" },
     { isbn: "978003", judul: "Basis Data" },
     { isbn: "978004", judul: "Pemrograman Web" },
-    { isbn: "978005", judul: "Kecerdasan Buatan" }
+    { isbn: "978005", judul: "Kecerdasan Buatan" },
+    { isbn: "978006", judul: "Sistem Operasi" },
+    { isbn: "978007", judul: "Jaringan Komputer" },
+    { isbn: "978008", judul: "Rekayasa Perangkat Lunak" }
 ];
 
-// ===============================
+// ==================================
 // Pencarian Iteratif
-// ===============================
-function cariIteratif(isbnCari) {
+// ==================================
+function cariIteratif() {
+    const isbnCari = document.getElementById("isbn").value;
     let operasi = 0;
 
     for (let i = 0; i < linkedListBuku.length; i++) {
         operasi++;
         if (linkedListBuku[i].isbn === isbnCari) {
-            return {
-                hasil: "Buku ditemukan",
-                judul: linkedListBuku[i].judul,
-                operasi: operasi
-            };
+            document.getElementById("hasil").innerHTML =
+                "Iteratif: Buku ditemukan<br>" +
+                "Judul: " + linkedListBuku[i].judul + "<br>" +
+                "Jumlah operasi: " + operasi;
+            return;
         }
     }
 
-    return {
-        hasil: "Buku tidak ditemukan",
-        operasi: operasi
-    };
+    document.getElementById("hasil").innerHTML =
+        "Iteratif: Buku tidak ditemukan<br>" +
+        "Jumlah operasi: " + operasi;
 }
 
-// ===============================
+// ==================================
 // Pencarian Rekursif
-// ===============================
-function cariRekursif(isbnCari, index = 0, operasi = 0) {
+// ==================================
+function cariRekursif(index = 0, operasi = 0) {
+    const isbnCari = document.getElementById("isbn").value;
+
     if (index >= linkedListBuku.length) {
-        return {
-            hasil: "Buku tidak ditemukan",
-            operasi: operasi
-        };
+        document.getElementById("hasil").innerHTML =
+            "Rekursif: Buku tidak ditemukan<br>" +
+            "Jumlah operasi: " + operasi;
+        return;
     }
 
     operasi++;
 
     if (linkedListBuku[index].isbn === isbnCari) {
-        return {
-            hasil: "Buku ditemukan",
-            judul: linkedListBuku[index].judul,
-            operasi: operasi
-        };
+        document.getElementById("hasil").innerHTML =
+            "Rekursif: Buku ditemukan<br>" +
+            "Judul: " + linkedListBuku[index].judul + "<br>" +
+            "Jumlah operasi: " + operasi;
+        return;
     }
 
-    return cariRekursif(isbnCari, index + 1, operasi);
+    cariRekursif(index + 1, operasi);
 }
-
-// ===============================
-// Contoh Pemanggilan Fungsi
-// ===============================
-const isbnCari = "978004";
-
-const hasilIteratif = cariIteratif(isbnCari);
-console.log("Iteratif:", hasilIteratif);
-
-const hasilRekursif = cariRekursif(isbnCari);
-console.log("Rekursif:", hasilRekursif);
