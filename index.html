@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pencarian Buku - Linked List</title>
+</head>
+<body>
+
+<h2>Pencarian Data Buku (ISBN)</h2>
+
+<label>ISBN yang dicari:</label>
+<input type="text" id="isbn">
+<br><br>
+
+<button onclick="cariIteratif()">Cari Iteratif</button>
+<button onclick="cariRekursif()">Cari Rekursif</button>
+
+<p id="hasil"></p>
+
+<script>
+    // Simulasi Linked List
+    const bukuList = [
+        { isbn: "978001", judul: "Algoritma" },
+        { isbn: "978002", judul: "Struktur Data" },
+        { isbn: "978003", judul: "Basis Data" },
+        { isbn: "978004", judul: "Pemrograman Web" }
+    ];
+
+    // Pencarian Iteratif
+    function cariIteratif() {
+        const isbnCari = document.getElementById("isbn").value;
+        for (let i = 0; i < bukuList.length; i++) {
+            if (bukuList[i].isbn === isbnCari) {
+                document.getElementById("hasil").innerHTML =
+                    "Iteratif: Buku ditemukan - " + bukuList[i].judul;
+                return;
+            }
+        }
+        document.getElementById("hasil").innerHTML =
+            "Iteratif: Buku tidak ditemukan";
+    }
+
+    // Pencarian Rekursif
+    function cariRekursif(index = 0) {
+        const isbnCari = document.getElementById("isbn").value;
+
+        if (index >= bukuList.length) {
+            document.getElementById("hasil").innerHTML =
+                "Rekursif: Buku tidak ditemukan";
+            return;
+        }
+
+        if (bukuList[index].isbn === isbnCari) {
+            document.getElementById("hasil").innerHTML =
+                "Rekursif: Buku ditemukan - " + bukuList[index].judul;
+            return;
+        }
+
+        cariRekursif(index + 1);
+    }
+</script>
+
+</body>
+</html>
